@@ -4,5 +4,4 @@ A web-based application for managing restaurant operations. Built with Node.js, 
 
 Usage ->
 Manage menu, staff, and orders
-Monitor inventory and financials
-Generate reports for insights
+Monitor inventory 
