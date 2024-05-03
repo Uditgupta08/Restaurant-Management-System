@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Staff Management</title>
+  </head>
+  <body>
+    <style>
+      body {
+        background-color: rgb(248, 232, 217);
+      }
+    </style>
+    <div class="header">
+      <div class="nav">
+        <ul>
+          <a href="/land"><li>Home</li></a>
+          <a href="/staff"><li>Staff</li></a>
+          <a href="/menu"><li>Food Menu</li></a>
+          <a href="/dining"><li>Book table</li></a>
+        </ul>
+      </div>
+      <div class="account">
+        <ul>
+          <a href="/land"
+            ><li><i class="fa-solid fa-house-chimney"></i></li
+          ></a>
+          <a href="#"
+            ><li><i class="fa-solid fa-user" id="user-lap"></i></li
+          ></a>
+        </ul>
+      </div>
+    </div>
+    <div class="staff_main">
+        <div class="staff_lef">
+    <div class="staff_d">
+      <h2>Staff Management</h2>
+      <form action="/staff/add" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required /><br />
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" required /><br />
+        <label for="position">Position:</label>
+        <input type="text" id="position" name="position" required /><br />
+        <button class="red_btn" type="submit">Add Staff</button>
+      </form>
+    </div>
+    <h3>Staff Members:</h3>
+    <ul>
+      <% staffMembers.forEach(member => { %>
+      <li>
+        <%= member.name %> - <%= member.position %>
+        <form action="/staff/delete/<%= member.id %>" method="post">
+          <button type="submit">Delete</button>
+        </form>
+      </li>
+      <% }) %>
+    </div>
+    <div class="staff_right">
+        <img src="./images/chef.png" alt="">
+    </div>
+    </div>
+
+    </ul>
+  </body>
+</html>

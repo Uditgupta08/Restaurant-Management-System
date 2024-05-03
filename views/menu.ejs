@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Menu</title>
+  </head>
+  <style>
+    body {
+      background-color: rgb(248, 232, 217);
+    }
+  </style>
+  <body>
+    <div class="header">
+      <div class="nav">
+        <ul>
+          <a href="/land"><li>Home</li></a>
+          <a href="/staff"><li>Staff</li></a>
+          <a href="/menu"><li>Food Menu</li></a>
+          <a href="/dining"><li>Book table</li></a>
+        </ul>
+      </div>
+      <div class="account">
+        <ul>
+          <a href="/land"
+            ><li><i class="fa-solid fa-house-chimney"></i></li
+          ></a>
+          <a href="#"
+            ><li><i class="fa-solid fa-user" id="user-lap"></i></li
+          ></a>
+        </ul>
+      </div>
+    </div>
+    <h1>Menu</h1>
+    <ul>
+      <% menuItems.forEach(item => { %>
+      <li>
+        <strong><%= item.item_name %></strong>
+        <% if (item.description) { %>
+        <p>Description: <%= item.description %></p>
+        <% } %>
+        <p>Price: <%= item.price %></p>
+        <p>Quantity: <%= item.quantity %></p>
+        <form action="/menu/deleteMenuItem" method="POST">
+          <input type="hidden" name="itemId" value="<%= item.item_id %>" />
+          <button type="submit">Delete</button>
+        </form>
+        <form action="/menu/increaseQuantity" method="POST">
+          <input type="hidden" name="itemId" value="<%= item.item_id %>" />
+          <input
+            type="number"
+            name="increaseAmount"
+            placeholder="Increase by..."
+            min="1"
+            required
+          />
+          <button type="submit">Increase Quantity</button>
+        </form>
+      </li>
+      <% }); %>
+    </ul>
+    <hr />
+    <div class="menu_main">
+      <div class="menu_left">
+        <h2>Add New Item</h2>
+        <form action="/menu/addMenuItem" method="POST">
+          <label for="itemName">Item Name:</label>
+          <input type="text" id="itemName" name="itemName" required /><br />
+          <label for="description">Description:</label>
+          <input type="text" id="description" name="description" /><br />
+          <label for="price">Price:</label>
+          <input type="text" id="price" name="price" required /><br />
+          <label for="quantity">Quantity:</label>
+          <input type="text" id="quantity" name="quantity" required /><br />
+          <button type="submit">Add Item</button>
+        </form>
+      </div>
+      <div class="menu_right">
+        <img class="menu_food" src="./images/food4.jpg" alt="" />
+      </div>
+    </div>
+  </body>
+</html>

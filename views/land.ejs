@@ -1,0 +1,92 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Land Page</title>
+  </head>
+  <body>
+    <h1>Welcome to the Land Page</h1>
+    <form action="/addCustomer" method="POST">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required /><br />
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required /><br />
+      <label for="phone_number">Phone Number:</label>
+      <input type="text" id="phone_number" name="phone_number" required /><br />
+      <label for="address">Address:</label>
+      <input type="text" id="address" name="address" required /><br />
+      <button type="submit">Submit</button>
+    </form>
+    <a href="/menu">Add in Menu</a>
+    <a href="/staff">Edit Staff</a>
+    <a href="/dining">Manage Tables</a>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Land Page</title>
+    <link rel="shortcut icon" href="../images/logo1.jpg" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header">
+        <div class="nav">
+          <ul>
+            <a href="/land"><li>Home</li></a>
+            <a href="/staff"><li>Staff</li></a>
+            <a href="/menu"><li>Food Menu</li></a>
+            <a href="/dining"><li>Book table</li></a>
+          </ul>
+        </div>
+        <div class="account">
+          <ul>
+            <a href="/land"
+              ><li><i class="fa-solid fa-house-chimney"></i></li
+            ></a>
+            <a href="#"
+              ><li><i class="fa-solid fa-user" id="user-lap"></i></li
+            ></a>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <div class="home">
+      <div class="main_slide">
+        <div class="credentials">
+          <form class="in" action="/addCustomer" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required /><br />
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required /><br />
+            <label for="phone_number">Phone Number:</label>
+            <input
+              type="text"
+              id="phone_number"
+              name="phone_number"
+              required
+            /><br />
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required /><br />
+            <button class="red_btn" type="submit">Submit</button>
+          </form>
+        </div>
+        <div>
+          <img src="../images/food plate.png" alt="" />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

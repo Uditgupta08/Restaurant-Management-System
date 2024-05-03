@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Manage Dining Tables</title>
+  </head>
+  <style>
+    body {
+      background-color: rgb(248, 232, 217);
+    }
+  </style>
+  <body>
+    <div class="header">
+      <div class="nav">
+        <ul>
+          <a href="/land"><li>Home</li></a>
+          <a href="/staff"><li>Staff</li></a>
+          <a href="/menu"><li>Food Menu</li></a>
+          <a href="/dining"><li>Book table</li></a>
+        </ul>
+      </div>
+      <div class="account">
+        <ul>
+          <a href="/land"
+            ><li><i class="fa-solid fa-house-chimney"></i></li
+          ></a>
+          <a href="#"
+            ><li><i class="fa-solid fa-user" id="user-lap"></i></li
+          ></a>
+        </ul>
+      </div>
+    </div>
+    <div class="dining_main">
+      <div class="dining_left">
+        <div class="dining_d">
+          <h1>Manage Dining Tables</h1>
+          <form id="addTableForm" action="/dining/add" method="POST">
+            <label for="tableName">Table Name:</label>
+            <input type="text" id="tableName" name="tableName" required /><br />
+            <label for="seatingCapacity">Seating Capacity:</label>
+            <input
+              type="number"
+              id="seatingCapacity"
+              name="seatingCapacity"
+              required
+            /><br />
+            <button type="submit">Add Table</button>
+          </form>
+        </div>
+        <h2>Existing Dining Tables:</h2>
+        <ul id="tablesList">
+          <% tables.forEach(table => { %>
+          <li>
+            <strong>Table Name:</strong> <%= table.table_name %><br />
+            <strong>Seating Capacity:</strong> <%= table.seating_capacity %><br />
+            <strong>Status:</strong> <%= table.occupied ? 'Occupied' : 'Empty'
+            %><br />
+            <form
+              action="/dining/update-status/<%= table.table_id %>"
+              method="POST"
+            >
+              <button
+                type="submit"
+                name="occupied"
+                value="<%= table.occupied ? 'false' : 'true' %>"
+              >
+                <%= table.occupied ? 'Vacate' : 'Reserve' %>
+              </button>
+            </form>
+            <form action="/dining/delete/<%= table.table_id %>" method="POST">
+              <button type="submit">Delete</button>
+            </form>
+          </li>
+          <% }); %>
+        </ul>
+      </div>
+      <div class="dining_right">
+        <img class="dining_img" src="./images/table.jpg" alt="" />
+      </div>
+    </div>
+  </body>
+</html>

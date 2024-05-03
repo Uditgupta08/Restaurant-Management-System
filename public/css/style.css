@@ -1,0 +1,432 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  color: black;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.headerbar {
+  display: none;
+}
+
+.searchicon {
+  display: block;
+}
+
+.bar {
+  font-size: 18px;
+  display: none;
+}
+
+/* Header for laptop (start) */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  padding: 0 7vw;
+  background-color: rgb(248, 232, 217);
+  border-bottom: 2px solid rgb(252, 196, 132);
+  box-shadow: 0 2px 20px rgb(253, 124, 124);
+}
+
+.header ul {
+  display: flex;
+  align-items: center;
+}
+
+.header ul li:hover {
+  color: rgb(253, 57, 8);
+}
+
+.header ul li i:hover {
+  color: rgb(253, 57, 8);
+}
+
+.nav ul li {
+  padding: 0 15px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.account {
+  flex: 0.1;
+}
+
+.account ul {
+  display: flex;
+  justify-content: end;
+}
+
+.account ul li {
+  padding: 0 15px;
+  font-size: 18px;
+}
+
+.logo img {
+  width: 150px;
+}
+
+.bar i:hover {
+  color: rgb(253, 57, 8);
+}
+
+.search {
+  width: 200px;
+  display: none;
+  justify-content: center;
+}
+
+.search input {
+  width: 100%;
+  outline: none;
+  border: none;
+  padding: 5px;
+}
+
+.srchicon {
+  display: block;
+  background-color: rgb(255, 210, 210);
+  padding: 4px 5px;
+  cursor: pointer;
+}
+
+/* Home page  */
+
+.home,
+.about,
+.menu {
+  background-color: rgb(248, 232, 217);
+  padding: 0 7vw;
+}
+
+/* section 1 */
+
+.main_slide {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap-reverse;
+} /*
+.credentials {
+  font-size: 2px;
+} */
+.main_slide div:nth-child(2) {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+}
+
+.main_slide div:nth-child(1) {
+  padding-top: 20px;
+  flex: 1;
+  font-size: 30px;
+}
+
+.main_slide div:nth-child(1) p {
+  font-size: 13px;
+  padding: 20px 0;
+}
+
+.main_slide div:nth-child(1) span {
+  color: rgb(253, 57, 8);
+  text-decoration: underline;
+  text-underline-offset: 10px;
+  text-decoration-color: rgb(253, 176, 34);
+}
+
+/* Button CSS */
+
+.red_btn {
+  cursor: pointer;
+  margin-top: 20px;
+  width: 160px;
+  font-weight: bold;
+  color: white;
+  line-height: 50px;
+  background-color: rgb(253, 77, 8);
+  border-radius: 5px;
+  border: 1px solid rgb(253, 77, 8);
+  box-shadow: 0 10px 15px rgb(250, 120, 69);
+  transition: all 0.2s;
+}
+
+.red_btn i {
+  color: white;
+}
+
+.red_btn:hover {
+  background-color: white;
+  box-shadow: 0 2px 15px rgb(250, 120, 69);
+  border: 1px solid rgb(253, 77, 8);
+  color: rgb(253, 77, 8);
+}
+
+.red_btn:hover i {
+  color: rgb(253, 77, 8);
+}
+
+.white_btn {
+  cursor: pointer;
+  margin-top: 20px;
+  width: 160px;
+  font-weight: bold;
+  color: rgb(253, 77, 8);
+  line-height: 50px;
+  border: 1px solid rgb(253, 77, 8);
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 15px rgb(250, 120, 69);
+  transition: all 0.2s;
+}
+
+.white_btn:hover {
+  color: white;
+  background-color: rgb(253, 77, 8);
+  box-shadow: 0 10px 15px rgb(250, 120, 69);
+}
+/* Signup/signin Form */
+
+.sign {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(8px);
+  display: none;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.sign-box {
+  transition: all 0.4s;
+  background-color: white;
+  max-width: 500px;
+  width: 500px;
+  border-radius: 20px;
+  padding: 35px;
+  transform: scale(0);
+}
+
+.sign-box h3 {
+  text-align: center;
+  font-size: 28px;
+  color: rgb(255, 72, 0);
+  padding-bottom: 20px;
+}
+
+.sign-box form input {
+  padding: 5px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  width: 100%;
+  font-size: 14px;
+  outline: none;
+}
+
+.sign-box .signin form input {
+  margin-bottom: 20px;
+}
+
+.sign-box .signin form input:last-of-type {
+  margin-top: 20px;
+}
+
+.sign-box form input:last-of-type {
+  background-color: rgb(253, 128, 78);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 5px;
+  line-height: 30px;
+  outline: none;
+  margin-bottom: 30px;
+}
+
+.sign-box form input:last-of-type:hover {
+  background-color: rgb(253, 99, 38);
+}
+
+.sign-box form label {
+  font-size: 16px;
+  font-weight: bold;
+  color: rgb(46, 46, 46);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.sign-box p {
+  font-size: 13px;
+  color: rgb(252, 30, 30);
+  cursor: pointer;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.sign-box p:hover {
+  text-decoration: underline;
+}
+
+.sign .bar {
+  display: block;
+  position: fixed;
+  top: 30px;
+  right: 50px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.signin {
+  display: none;
+}
+
+/*Book table page CSS*/
+
+.table {
+  width: 100%;
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background: url(../images/table2.jpg);
+}
+
+.table .sign {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  display: block;
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.table .sign-box {
+  background-color: white;
+  max-width: 500px;
+  width: 500px;
+  border-radius: 20px;
+  padding: 35px;
+  padding-bottom: 10px;
+  transform: scale(1);
+  box-shadow: 0 0 10px rgba(32, 32, 32, 0.384);
+}
+
+.table .signup h3 {
+  text-align: left;
+}
+
+/* Food menu page CSS*/
+
+.menu1 {
+  padding: 100px 0;
+  padding-top: 50px;
+}
+
+.menu h1 {
+  font-size: 3rem;
+  font-family: cursive;
+  text-align: center;
+  padding: 30px;
+  padding-top: 20px;
+}
+
+.menu .fav-food {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.menu .item {
+  background-color: white;
+  padding: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 280px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  transition: all 0.5s;
+  box-shadow: 0 2px 5px rgb(53, 0, 0);
+  cursor: pointer;
+}
+
+.menu .item div {
+  width: 100%;
+}
+
+.menu .item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 10px rgb(53, 0, 0);
+}
+
+.menu .item div img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.menu .item h3 {
+  padding: 15px;
+  padding-bottom: 0px;
+}
+
+.menu .item p {
+  font-size: 12px;
+  padding: 0 15px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.menu .item .fav-price {
+  font-size: 17px;
+  color: red;
+  padding-bottom: 10px;
+  text-align: right;
+  margin: 5px 0;
+  font-weight: bold;
+}
+.staff_d {
+  padding-top: 3%;
+  padding-bottom: 4%;
+}
+.staff_d h2 {
+  padding-bottom: 2%;
+}
+.staff_main {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.dining_main {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.dining_img {
+  padding-top: 3%;
+  height: 500px;
+}
+.dining_d {
+  padding-bottom: 8%;
+}
+.menu_main {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.menu_food {
+  margin-top: 50px;
+  height: 200px;
+}
