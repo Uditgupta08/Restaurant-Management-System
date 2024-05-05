@@ -47,6 +47,28 @@ app.use("/staff", staffRouter);
 app.use("/dining", tablesRouter);
 app.use("/cart", cartRouter);
 
+const createFunctionQuery = `
+CREATE OR REPLACE FUNCTION no_special_char(name VARCHAR)
+RETURNS BOOLEAN AS 
+BEGIN
+  IF name ~* '[^a-zA-Z0-9]' THEN
+    RETURN FALSE;
+  ELSE
+    RETURN TRUE;
+  END IF;
+END;
+LANGUAGE plpgsql;
+`;
+
+client
+  .query(createFunctionQuery)
+  .then(() => {
+    console.log("Function created successfully");
+  })
+  .catch((err) => {
+    console.error("Error creating function:", err);
+  });
+
 app.get("/", (req, res) => {
   client.query(
     `
@@ -78,33 +100,45 @@ app.get("/land", (req, res) => {
 app.post("/addCustomer", (req, res) => {
   const { name, email, phone_number, address } = req.body;
 
-  const checkCustomerQuery = `SELECT * FROM customer WHERE email = $1`;
   client
-    .query(checkCustomerQuery, [email])
+    .query("SELECT no_special_char($1)", [name])
     .then((result) => {
-      if (result.rows.length > 0) {
-        req.session.customerId = result.rows[0].customer_id;
-        res.redirect("/menudisplay");
-      } else {
-        const insertDataQuery = `
-          INSERT INTO customer (name, email, phone_number, address)
-          VALUES ($1, $2, $3, $4)
-          RETURNING customer_id`;
+      if (result.rows[0].no_special_char) {
+        const checkCustomerQuery = `SELECT * FROM customer WHERE email = $1`;
         client
-          .query(insertDataQuery, [name, email, phone_number, address])
+          .query(checkCustomerQuery, [email])
           .then((result) => {
-            req.session.customerId = result.rows[0].customer_id;
-            res.redirect("/menu");
+            if (result.rows.length > 0) {
+              req.session.customerId = result.rows[0].customer_id;
+              res.redirect("/menudisplay");
+            } else {
+              const insertDataQuery = `
+                INSERT INTO customer (name, email, phone_number, address)
+                VALUES ($1, $2, $3, $4)
+                RETURNING customer_id`;
+              client
+                .query(insertDataQuery, [name, email, phone_number, address])
+                .then((result) => {
+                  req.session.customerId = result.rows[0].customer_id;
+                  res.redirect("/menu");
+                })
+                .catch((err) => {
+                  console.error("Error inserting customer data:", err);
+                  res.status(500).send("Error inserting customer data");
+                });
+            }
           })
           .catch((err) => {
-            console.error("Error inserting customer data:", err);
-            res.status(500).send("Error inserting customer data");
+            console.error("Error checking customer existence:", err);
+            res.status(500).send("Error checking customer existence");
           });
+      } else {
+        res.status(400).send("Username cannot contain special characters");
       }
     })
     .catch((err) => {
-      console.error("Error checking customer existence:", err);
-      res.status(500).send("Error checking customer existence");
+      console.error("Error validating username:", err);
+      res.status(500).send("Error validating username");
     });
 });
 
