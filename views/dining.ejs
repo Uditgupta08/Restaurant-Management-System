@@ -57,20 +57,39 @@
             <strong>Seating Capacity:</strong> <%= table.seating_capacity %><br />
             <strong>Status:</strong> <%= table.occupied ? 'Occupied' : 'Empty'
             %><br />
+            <form action="/dining/reserve/<%= table.table_id %>" method="POST">
+              <label for="name">Name:</label>
+              <input type="text" id="name" name="name" required /><br />
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" required /><br />
+              <label for="phone_number">Phone Number:</label>
+              <input
+                type="tel"
+                id="phone_number"
+                name="phone_number"
+                required
+              /><br />
+              <label for="address">Address:</label>
+              <textarea id="address" name="address" required></textarea><br />
+              <button type="submit">Reserve</button>
+            </form>
+
             <form
-              action="/dining/update-status/<%= table.table_id %>"
+              id="deleteForm<%= table.table_id %>"
+              action="/dining/delete/<%= table.table_id %>"
               method="POST"
             >
               <button
-                type="submit"
-                name="occupied"
-                value="<%= table.occupied ? 'false' : 'true' %>"
+                type="button"
+                class="deleteButton"
+                data-tableid="<%= table.table_id %>"
               >
-                <%= table.occupied ? 'Vacate' : 'Reserve' %>
+                Delete
               </button>
             </form>
-            <form action="/dining/delete/<%= table.table_id %>" method="POST">
-              <button type="submit">Delete</button>
+
+            <form action="/dining/vacate/<%= table.table_id %>" method="POST">
+              <button type="submit">Vacate</button>
             </form>
           </li>
           <% }); %>
@@ -80,5 +99,25 @@
         <img class="dining_img" src="./images/table.jpg" alt="" />
       </div>
     </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const deleteButtons = document.querySelectorAll(".deleteButton");
+        deleteButtons.forEach((button) => {
+          button.addEventListener("click", async function (event) {
+            const tableId = event.target.dataset.tableid;
+            const response = await fetch(`/dining/delete/${tableId}`, {
+              method: "POST",
+            });
+            const responseData = await response.text();
+            if (response.ok) {
+              window.location.reload();
+            } else {
+              alert(responseData);
+            }
+          });
+        });
+      });
+    </script>
   </body>
 </html>
