@@ -36,7 +36,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const menuRouter = require("./routes/menu");
-const menuDisplayRouter = require("./routes/menuDisplay");
+const menuDisplayRouter = require("./routes/menudisplay");
 const staffRouter = require("./routes/staff");
 const tablesRouter = require("./routes/dining");
 const cartRouter = require("./routes/cart");
@@ -50,16 +50,17 @@ app.use("/cart", cartRouter);
 const createFunctionQuery = `
 CREATE OR REPLACE FUNCTION no_special_char(name VARCHAR)
 RETURNS BOOLEAN AS 
+$$
 BEGIN
-  IF name ~* '[^a-zA-Z0-9]' THEN
+  IF name ~* '[^a-zA-Z0-9 ]' THEN
     RETURN FALSE;
   ELSE
     RETURN TRUE;
   END IF;
 END;
+$$
 LANGUAGE plpgsql;
 `;
-
 client
   .query(createFunctionQuery)
   .then(() => {
@@ -91,6 +92,7 @@ app.get("/", (req, res) => {
     }
   );
 });
+
 app.get("/thankYou", (req, res) => {
   res.render("thankYou");
 });
