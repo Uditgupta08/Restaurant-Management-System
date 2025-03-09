@@ -1,6 +1,23 @@
 const client = require("../db");
 
 // Fetch all staff members
+const initializeTables = async () => {
+  try {
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS staff (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(100) NOT NULL,
+        phone VARCHAR(15) NOT NULL,
+        position VARCHAR(50) NOT NULL
+      );
+    `);
+  } catch (error) {
+    console.error("Error creating staff table:", error);
+  }
+};
+
+initializeTables();
+
 const getStaffMembers = async (req, res) => {
   try {
     const result = await client.query("SELECT * FROM staff");

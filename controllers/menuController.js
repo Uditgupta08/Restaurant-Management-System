@@ -1,5 +1,22 @@
 const client = require("../db");
 
+const initializeTables = async () => {
+  try {
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS menu_items (
+        item_id SERIAL PRIMARY KEY,
+        item_name VARCHAR(100) NOT NULL,
+        description TEXT,
+        price DECIMAL(10,2) NOT NULL,
+        quantity INT NOT NULL CHECK (quantity >= 0)
+      );
+    `);
+  } catch (error) {
+    console.error("Error creating menu_items table:", error);
+  }
+};
+
+initializeTables();
 // Fetch menu items
 const getMenuItems = async (req, res) => {
   try {

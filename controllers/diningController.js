@@ -169,6 +169,37 @@
 
 const client = require("../db");
 
+const initializeTables = async () => {
+  try {
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS dining (
+        table_id SERIAL PRIMARY KEY,
+        table_name VARCHAR(50) NOT NULL,
+        seating_capacity INT NOT NULL CHECK (seating_capacity > 0),
+        occupied BOOLEAN DEFAULT FALSE
+      );
+
+      CREATE TABLE IF NOT EXISTS customer (
+        customer_id SERIAL PRIMARY KEY,
+        name VARCHAR(100) NOT NULL,
+        email VARCHAR(100) UNIQUE NOT NULL,
+        phone_number VARCHAR(15) NOT NULL,
+        address TEXT
+      );
+
+      CREATE TABLE IF NOT EXISTS reservation (
+        reservation_id SERIAL PRIMARY KEY,
+        table_id INT REFERENCES dining(table_id) ON DELETE CASCADE,
+        customer_id INT REFERENCES customer(customer_id) ON DELETE CASCADE,
+        reservation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+  } catch (error) {
+    console.error("Error creating dining tables:", error);
+  }
+};
+
+initializeTables();
 // Fetch all dining tables
 const getDiningTables = async (req, res) => {
   try {
